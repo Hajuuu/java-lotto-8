@@ -10,7 +10,6 @@ import static lotto.ErrorMessages.INPUT_LOTTO_NUMBER_DUPLICATE;
 import static lotto.ErrorMessages.INPUT_WRONG_RANGE;
 import static lotto.InputView.validateAmount;
 import static lotto.InputView.validateLotto;
-import static lotto.InputView.validateParseInt;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -80,7 +79,7 @@ class InputViewTest {
         String numbers = "a,1,2,3,4,5";
 
         // when & then
-        assertThatThrownBy(() -> validateParseInt(numbers))
+        assertThatThrownBy(() -> validateLotto(numbers))
                 .hasMessage(INPUT_LOTTO_IS_NOT_NUMBER.getMessage());
     }
 
