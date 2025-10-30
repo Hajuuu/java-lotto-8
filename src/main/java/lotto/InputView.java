@@ -20,17 +20,17 @@ public class InputView {
         try {
             int amount = Integer.parseInt(input);
             if (amount <= 0) {
-                throw new IllegalArgumentException("[ERROR] 0 이하의 숫자는 입력할 수 없습니다.");
+                throw new IllegalArgumentException(ErrorMessages.INPUT_AMOUNT_IS_NEGATIVE.getMessage());
             }
             if (amount > 100000) {
-                throw new IllegalArgumentException("[ERROR] 100,000을 초과하여 구매할 수 없습니다.");
+                throw new IllegalArgumentException(ErrorMessages.INPUT_AMOUNT_IS_OVER.getMessage());
             }
             if (amount % 1000 != 0) {
-                throw new IllegalArgumentException("[ERROR] 로또는 1,000원 단위로 구매 가능합니다.");
+                throw new IllegalArgumentException(ErrorMessages.INPUT_AMOUNT_WRONG_UNITS.getMessage());
             }
             return amount;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 숫자만 입력 가능합니다.");
+            throw new IllegalArgumentException(ErrorMessages.INPUT_AMOUNT_IS_NOT_NUMBER.getMessage());
         }
     }
 }
