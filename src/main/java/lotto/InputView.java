@@ -2,6 +2,11 @@ package lotto;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class InputView {
 
     public static int inputAmount() {
@@ -31,6 +36,51 @@ public class InputView {
             return amount;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessages.INPUT_AMOUNT_IS_NOT_NUMBER.getMessage());
+        }
+    }
+
+    public static Lotto inputLotto() {
+        while (true) {
+            System.out.println("당첨 번호를 입력해 주세요.");
+            String input = readLine();
+            try {
+                return validateLotto(input);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+
+    public static Lotto validateLotto(String input) {
+        List<Integer> numbers = Arrays.stream(input.split(","))
+                .map(String::trim)
+                .map(InputView::validateParseInt)
+                .toList();
+
+        validateDuplicate(numbers);
+        return new Lotto(numbers);
+    }
+
+    public static int validateParseInt(String number) {
+        if (number == null || number.trim().isEmpty()) {
+            throw new IllegalArgumentException(ErrorMessages.INPUT_LOTTO_IS_EMPTY.getMessage());
+        }
+        try {
+            int lottoNumber = Integer.parseInt(number);
+            if (lottoNumber < 1 || lottoNumber > 45) {
+                throw new IllegalArgumentException(ErrorMessages.INPUT_LOTTO_WRONG_RANGE.getMessage());
+            }
+            return lottoNumber;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(ErrorMessages.INPUT_LOTTO_IS_NOT_NUMBER.getMessage());
+        }
+    }
+
+    public static void validateDuplicate(List<Integer> numbers) {
+        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
+        if (uniqueNumbers.size() != numbers.size()) {
+            throw new IllegalArgumentException(ErrorMessages.INPUT_LOTTO_NUMBER_DUPLICATE.getMessage());
         }
     }
 }
