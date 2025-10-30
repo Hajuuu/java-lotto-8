@@ -4,14 +4,18 @@ import static lotto.ErrorMessages.INPUT_AMOUNT_IS_NEGATIVE;
 import static lotto.ErrorMessages.INPUT_AMOUNT_IS_NOT_NUMBER;
 import static lotto.ErrorMessages.INPUT_AMOUNT_IS_OVER;
 import static lotto.ErrorMessages.INPUT_AMOUNT_WRONG_UNITS;
+import static lotto.ErrorMessages.INPUT_BONUS_NUMBER_DUPLICATE;
+import static lotto.ErrorMessages.INPUT_BONUS_NUMBER_IS_NOT_NUMBER;
 import static lotto.ErrorMessages.INPUT_LOTTO_IS_EMPTY;
 import static lotto.ErrorMessages.INPUT_LOTTO_IS_NOT_NUMBER;
 import static lotto.ErrorMessages.INPUT_LOTTO_NUMBER_DUPLICATE;
 import static lotto.ErrorMessages.INPUT_WRONG_RANGE;
 import static lotto.InputView.validateAmount;
+import static lotto.InputView.validateBonusNumber;
 import static lotto.InputView.validateLotto;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -96,13 +100,37 @@ class InputViewTest {
 
 
     @Test
-    @DisplayName("로또 번호에 숫자 없이 공백만 있는 경우")
-    void 로또_번호에_숫자_없이_공백만_있는_경우() {
+    @DisplayName("로또 번호에 숫자 없이 공백만 있는 경우 예외 발생")
+    void 로또_번호에_숫자_없이_공백만_있는_경우_예외_발생() {
         // given
         String numbers = "1, 2, ,3,4,5,6";
 
         // when & then
         assertThatThrownBy(() -> validateLotto(numbers))
                 .hasMessage(INPUT_LOTTO_IS_EMPTY.getMessage());
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 당첨 번호와 중복될 경우 예외 발생")
+    void 보너스_번호가_당첨_번호와_중복될_경우_예외_발생() {
+        // given
+        String number = "6";
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+
+        // when & then
+        assertThatThrownBy(() -> validateBonusNumber(lotto, number))
+                .hasMessage(INPUT_BONUS_NUMBER_DUPLICATE.getMessage());
+    }
+
+    @Test
+    @DisplayName("숫자가 아닌 값이 입력될 경우 예외 발생")
+    void 숫자가_아닌_값이_입력될_경우_예외_발생() {
+        // given
+        String number = "six";
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+
+        // when & then
+        assertThatThrownBy(() -> validateBonusNumber(lotto, number))
+                .hasMessage(INPUT_BONUS_NUMBER_IS_NOT_NUMBER.getMessage());
     }
 }
