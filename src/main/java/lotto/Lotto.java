@@ -16,5 +16,10 @@ public class Lotto {
         }
     }
 
+    public void duplicateLotto(int bonusNumber) {
+        if (this.numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ErrorMessages.INPUT_BONUS_NUMBER_DUPLICATE.getMessage());
+        }
+    }
     // TODO: 추가 기능 구현
 }
