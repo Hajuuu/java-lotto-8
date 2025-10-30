@@ -62,7 +62,7 @@ public class InputView {
         return new Lotto(numbers);
     }
 
-    public static int validateParseInt(String number) {
+    private static int validateParseInt(String number) {
         if (number == null || number.trim().isEmpty()) {
             throw new IllegalArgumentException(ErrorMessages.INPUT_LOTTO_IS_EMPTY.getMessage());
         }
@@ -75,7 +75,7 @@ public class InputView {
         }
     }
 
-    public static void validateDuplicate(List<Integer> numbers) {
+    private static void validateDuplicate(List<Integer> numbers) {
         Set<Integer> uniqueNumbers = new HashSet<>(numbers);
         if (uniqueNumbers.size() != numbers.size()) {
             throw new IllegalArgumentException(ErrorMessages.INPUT_LOTTO_NUMBER_DUPLICATE.getMessage());
@@ -105,7 +105,7 @@ public class InputView {
         }
     }
 
-    public static void validateRange(int number) {
+    private static void validateRange(int number) {
         if (number < 1 || number > 45) {
             throw new IllegalArgumentException(ErrorMessages.INPUT_WRONG_RANGE.getMessage());
         }
