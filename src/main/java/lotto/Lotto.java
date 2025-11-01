@@ -7,7 +7,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        this.numbers = sortedNumbers(numbers);
     }
 
     private void validate(List<Integer> numbers) {
@@ -21,5 +21,11 @@ public class Lotto {
             throw new IllegalArgumentException(ErrorMessages.INPUT_BONUS_NUMBER_DUPLICATE.getMessage());
         }
     }
-    // TODO: 추가 기능 구현
+
+    private List<Integer> sortedNumbers(List<Integer> numbers) {
+        return numbers.stream()
+                .sorted()
+                .toList();
+    }
+
 }
