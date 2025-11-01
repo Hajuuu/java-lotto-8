@@ -20,15 +20,15 @@ public enum Rank {
         this.count = count;
     }
 
-    public int getWinnings() {
-        return winnings;
-    }
-
-    public Rank findRank(int count, boolean bonus) {
+    public static Rank findRank(int count, boolean bonus) {
         return Arrays.stream(values())
                 .filter(rank -> rank.count == count)
                 .filter(rank -> rank.bonus == bonus)
                 .findFirst()
                 .orElse(NONE);
+    }
+
+    public int getWinnings() {
+        return winnings;
     }
 }
