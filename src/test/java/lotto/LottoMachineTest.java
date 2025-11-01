@@ -16,22 +16,10 @@ class LottoMachineTest {
         int amount = 3000;
 
         // when
-        int tickets = lottoMachine.buyTickets(amount);
+        List<Lotto> lotto = lottoMachine.issuanceLotto(amount);
 
         // then
-        assertThat(tickets).isEqualTo(3);
+        assertThat(lotto.size()).isEqualTo(3);
     }
 
-    @Test
-    @DisplayName("로또 번호 발행 테스트")
-    void 로또_번호_발행_테스트() {
-        // given
-        LottoMachine lottoMachine = new LottoMachine();
-
-        // when
-        List<Integer> numbers = lottoMachine.pickLottoNumbers();
-
-        // then
-        assertThat(numbers.size()).isEqualTo(6);
-    }
 }
