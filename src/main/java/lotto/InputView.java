@@ -39,7 +39,7 @@ public class InputView {
         }
     }
 
-    public static Lotto inputLotto() {
+    public static List<Integer> inputWinningNumbers() {
         while (true) {
             System.out.println("당첨 번호를 입력해 주세요.");
             String input = readLine();
@@ -52,14 +52,14 @@ public class InputView {
     }
 
 
-    public static Lotto validateLotto(String input) {
+    public static List<Integer> validateLotto(String input) {
         List<Integer> numbers = Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(InputView::validateParseInt)
                 .toList();
 
         validateDuplicate(numbers);
-        return new Lotto(numbers);
+        return numbers;
     }
 
     private static int validateParseInt(String number) {
