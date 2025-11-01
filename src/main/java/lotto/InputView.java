@@ -82,26 +82,33 @@ public class InputView {
         }
     }
 
-    public static int inputBonusNumber(Lotto lotto) {
+    public static int inputBonusNumber(List<Integer> winningNumbers) {
         while (true) {
             System.out.println("보너스 번호를 입력해 주세요.");
             String input = readLine();
             try {
-                return validateBonusNumber(lotto, input);
+                return validateBonusNumber(winningNumbers, input);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    public static int validateBonusNumber(Lotto lotto, String number) {
+    public static int validateBonusNumber(List<Integer> winningNumbers, String number) {
         try {
             int bonusNumber = Integer.parseInt(number);
-            lotto.duplicateLotto(bonusNumber);
+            duplicateLotto(winningNumbers, bonusNumber);
             validateRange(bonusNumber);
             return bonusNumber;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessages.INPUT_BONUS_NUMBER_IS_NOT_NUMBER.getMessage());
+        }
+    }
+
+
+    public static void duplicateLotto(List<Integer> numbers, int bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ErrorMessages.INPUT_BONUS_NUMBER_DUPLICATE.getMessage());
         }
     }
 
