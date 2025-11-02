@@ -7,18 +7,20 @@ import java.util.List;
 public class OutputView {
 
     public static void printLotto(List<Lotto> lotto) {
+        System.out.printf("%n%d개를 구매했습니다.%n", lotto.size());
         lotto.forEach(System.out::println);
     }
 
     public static void printWinningStatistics(LottoResult lottoResult, double profitRate) {
-        System.out.println("당첨 통계");
+        System.out.println("\n당첨 통계");
         System.out.println("---");
         Arrays.stream(Rank.values())
                 .filter(rank -> rank != Rank.NONE)
                 .sorted(Comparator.comparingInt(Rank::getWinnings)) // 낮은 순부터 출력
                 .forEach(rank -> {
                     System.out.printf(
-                            "%d%s (%d원) - %d개%n", rank.getCount(), getRankMessage(rank), rank.getWinnings(),
+                            "%d%s (%s원) - %d개%n", rank.getCount(), getRankMessage(rank),
+                            String.format("%,d", rank.getWinnings()),
                             lottoResult.getCount(rank)
                     );
                 });
@@ -29,6 +31,6 @@ public class OutputView {
         if (rank == Rank.SECOND) {
             return "개 일치, 보너스 볼 일치";
         }
-        return rank.getCount() + "개 일치";
+        return "개 일치";
     }
 }

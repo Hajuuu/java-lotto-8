@@ -29,6 +29,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return super.toString();
+        return numbers.toString();
     }
 }
