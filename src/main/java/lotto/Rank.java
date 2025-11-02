@@ -31,4 +31,8 @@ public enum Rank {
     public int getWinnings() {
         return winnings;
     }
+
+    public int getCount() {
+        return count;
+    }
 }
