@@ -16,6 +16,7 @@ import static lotto.view.InputView.validateLotto;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
+import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -115,10 +116,10 @@ class InputViewTest {
     void 보너스_번호가_당첨_번호와_중복될_경우_예외_발생() {
         // given
         String number = "6";
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         // when & then
-        assertThatThrownBy(() -> validateBonusNumber(numbers, number))
+        assertThatThrownBy(() -> validateBonusNumber(lotto, number))
                 .hasMessage(INPUT_BONUS_NUMBER_DUPLICATE.getMessage());
     }
 
@@ -127,10 +128,10 @@ class InputViewTest {
     void 숫자가_아닌_값이_입력될_경우_예외_발생() {
         // given
         String number = "six";
-        List<Integer> numbers = List.of(1, 2, 3, 4, 5, 7);
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
 
         // when & then
-        assertThatThrownBy(() -> validateBonusNumber(numbers, number))
+        assertThatThrownBy(() -> validateBonusNumber(lotto, number))
                 .hasMessage(INPUT_BONUS_NUMBER_IS_NOT_NUMBER.getMessage());
     }
 }

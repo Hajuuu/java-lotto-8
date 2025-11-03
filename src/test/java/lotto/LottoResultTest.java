@@ -23,11 +23,11 @@ class LottoResultTest {
                 new Lotto(List.of(1, 2, 3, 7, 8, 9))    // 3개 일치
         );
 
-        List<Integer> winningNumbers = List.of(1, 2, 3, 4, 5, 6);
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
         int bonusNumber = 10;
 
         // when
-        lottoResult.confirmWinnings(purchaseLotto, winningNumbers, bonusNumber);
+        lottoResult.confirmWinnings(purchaseLotto, winningLotto, bonusNumber);
 
         // then
         Map<Rank, Integer> results = lottoResult.getResults();

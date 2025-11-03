@@ -19,12 +19,12 @@ class LottoStatisticsTest {
         List<Lotto> purchaseLottos = List.of(
                 new Lotto(List.of(1, 2, 3, 7, 8, 9)) // 3개 일치
         );
-        List<Integer> winningNumbers = List.of(1, 2, 3, 10, 11, 12);
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 10, 11, 12));
         int bonusNumber = 13;
         int amount = 8000;
 
         // when
-        lottoResult.confirmWinnings(purchaseLottos, winningNumbers, bonusNumber);
+        lottoResult.confirmWinnings(purchaseLottos, winningLotto, bonusNumber);
         double profitRate = LottoStatistics.calculateProfitRate(lottoResult, amount);
 
         // then
