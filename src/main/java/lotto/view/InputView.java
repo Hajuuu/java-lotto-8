@@ -1,4 +1,4 @@
-package lotto;
+package lotto.view;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.util.ErrorMessages;
 
 public class InputView {
 

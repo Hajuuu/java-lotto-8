@@ -1,18 +1,18 @@
 package lotto;
 
-import static lotto.ErrorMessages.INPUT_AMOUNT_IS_NEGATIVE;
-import static lotto.ErrorMessages.INPUT_AMOUNT_IS_NOT_NUMBER;
-import static lotto.ErrorMessages.INPUT_AMOUNT_IS_OVER;
-import static lotto.ErrorMessages.INPUT_AMOUNT_WRONG_UNITS;
-import static lotto.ErrorMessages.INPUT_BONUS_NUMBER_DUPLICATE;
-import static lotto.ErrorMessages.INPUT_BONUS_NUMBER_IS_NOT_NUMBER;
-import static lotto.ErrorMessages.INPUT_LOTTO_IS_EMPTY;
-import static lotto.ErrorMessages.INPUT_LOTTO_IS_NOT_NUMBER;
-import static lotto.ErrorMessages.INPUT_LOTTO_NUMBER_DUPLICATE;
-import static lotto.ErrorMessages.INPUT_WRONG_RANGE;
-import static lotto.InputView.validateAmount;
-import static lotto.InputView.validateBonusNumber;
-import static lotto.InputView.validateLotto;
+import static lotto.util.ErrorMessages.INPUT_AMOUNT_IS_NEGATIVE;
+import static lotto.util.ErrorMessages.INPUT_AMOUNT_IS_NOT_NUMBER;
+import static lotto.util.ErrorMessages.INPUT_AMOUNT_IS_OVER;
+import static lotto.util.ErrorMessages.INPUT_AMOUNT_WRONG_UNITS;
+import static lotto.util.ErrorMessages.INPUT_BONUS_NUMBER_DUPLICATE;
+import static lotto.util.ErrorMessages.INPUT_BONUS_NUMBER_IS_NOT_NUMBER;
+import static lotto.util.ErrorMessages.INPUT_LOTTO_IS_EMPTY;
+import static lotto.util.ErrorMessages.INPUT_LOTTO_IS_NOT_NUMBER;
+import static lotto.util.ErrorMessages.INPUT_LOTTO_NUMBER_DUPLICATE;
+import static lotto.util.ErrorMessages.INPUT_WRONG_RANGE;
+import static lotto.view.InputView.validateAmount;
+import static lotto.view.InputView.validateBonusNumber;
+import static lotto.view.InputView.validateLotto;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
