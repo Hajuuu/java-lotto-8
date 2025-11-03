@@ -9,6 +9,11 @@ import lotto.util.ErrorMessages;
 
 public class InputView {
 
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
+    private static final int LOTTO_PRICE = 1_000;
+    private static final int MAX_PURCHASE_AMOUNT = 100_000;
+
     public static int inputAmount() {
         while (true) {
             System.out.println("구입금액을 입력해 주세요.");
@@ -27,10 +32,10 @@ public class InputView {
             if (amount <= 0) {
                 throw new IllegalArgumentException(ErrorMessages.INPUT_AMOUNT_IS_NEGATIVE.getMessage());
             }
-            if (amount > 100000) {
+            if (amount > MAX_PURCHASE_AMOUNT) {
                 throw new IllegalArgumentException(ErrorMessages.INPUT_AMOUNT_IS_OVER.getMessage());
             }
-            if (amount % 1000 != 0) {
+            if (amount % LOTTO_PRICE != 0) {
                 throw new IllegalArgumentException(ErrorMessages.INPUT_AMOUNT_WRONG_UNITS.getMessage());
             }
             return amount;
@@ -106,7 +111,7 @@ public class InputView {
     }
 
     private static void validateRange(int number) {
-        if (number < 1 || number > 45) {
+        if (number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER) {
             throw new IllegalArgumentException(ErrorMessages.INPUT_WRONG_RANGE.getMessage());
         }
     }
