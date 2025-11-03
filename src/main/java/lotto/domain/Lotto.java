@@ -46,6 +46,12 @@ public class Lotto {
         return numbers.contains(number);
     }
 
+    public int countMatching(Lotto other) {
+        return (int) other.numbers.stream()  // 같은 클래스 내부라 private 접근 가능
+                .filter(this::contains)
+                .count();
+    }
+
     @Override
     public String toString() {
         return numbers.toString();

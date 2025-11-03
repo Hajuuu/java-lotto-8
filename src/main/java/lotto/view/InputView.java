@@ -3,9 +3,8 @@ package lotto.view;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import lotto.domain.Lotto;
 import lotto.util.ErrorMessages;
 
 public class InputView {
@@ -40,7 +39,7 @@ public class InputView {
         }
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public static Lotto inputWinningNumbers() {
         while (true) {
             System.out.println("\n당첨 번호를 입력해 주세요.");
             String input = readLine();
@@ -53,14 +52,13 @@ public class InputView {
     }
 
 
-    public static List<Integer> validateLotto(String input) {
+    public static Lotto validateLotto(String input) {
         List<Integer> numbers = Arrays.stream(input.split(","))
                 .map(String::trim)
                 .map(InputView::validateParseInt)
                 .toList();
 
-        validateDuplicate(numbers);
-        return numbers;
+        return new Lotto(numbers);
     }
 
     private static int validateParseInt(String number) {
@@ -76,29 +74,23 @@ public class InputView {
         }
     }
 
-    private static void validateDuplicate(List<Integer> numbers) {
-        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
-        if (uniqueNumbers.size() != numbers.size()) {
-            throw new IllegalArgumentException(ErrorMessages.INPUT_LOTTO_NUMBER_DUPLICATE.getMessage());
-        }
-    }
 
-    public static int inputBonusNumber(List<Integer> winningNumbers) {
+    public static int inputBonusNumber(Lotto winningLotto) {
         while (true) {
             System.out.println("\n보너스 번호를 입력해 주세요.");
             String input = readLine();
             try {
-                return validateBonusNumber(winningNumbers, input);
+                return validateBonusNumber(winningLotto, input);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    public static int validateBonusNumber(List<Integer> winningNumbers, String number) {
+    public static int validateBonusNumber(Lotto winningLotto, String number) {
         try {
             int bonusNumber = Integer.parseInt(number.trim());
-            duplicateLotto(winningNumbers, bonusNumber);
+            duplicateLotto(winningLotto, bonusNumber);
             validateRange(bonusNumber);
             return bonusNumber;
         } catch (NumberFormatException e) {
@@ -107,8 +99,8 @@ public class InputView {
     }
 
 
-    public static void duplicateLotto(List<Integer> numbers, int bonusNumber) {
-        if (numbers.contains(bonusNumber)) {
+    public static void duplicateLotto(Lotto winningLotto, int bonusNumber) {
+        if (winningLotto.contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessages.INPUT_BONUS_NUMBER_DUPLICATE.getMessage());
         }
     }

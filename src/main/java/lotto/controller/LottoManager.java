@@ -19,10 +19,10 @@ public class LottoManager {
         List<Lotto> lotto = lottoMachine.issuanceLotto(amount);
         OutputView.printLotto(lotto);
 
-        List<Integer> winningNumbers = InputView.inputWinningNumbers();
-        int bonusNumber = InputView.inputBonusNumber(winningNumbers);
+        Lotto winningLotto = InputView.inputWinningNumbers();
+        int bonusNumber = InputView.inputBonusNumber(winningLotto);
 
-        lottoResult.confirmWinnings(lotto, winningNumbers, bonusNumber);
+        lottoResult.confirmWinnings(lotto, winningLotto, bonusNumber);
 
         double rate = LottoStatistics.calculateProfitRate(lottoResult, amount);
         OutputView.printWinningStatistics(lottoResult, rate);

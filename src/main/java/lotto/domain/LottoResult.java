@@ -8,9 +8,9 @@ public class LottoResult {
 
     private final Map<Rank, Integer> results = new HashMap<>();
 
-    public void confirmWinnings(List<Lotto> purchaseLotto, List<Integer> winningNumbers, int bonusNumber) {
+    public void confirmWinnings(List<Lotto> purchaseLotto, Lotto winningLotto, int bonusNumber) {
         purchaseLotto.forEach(lotto -> {
-            int matchCount = countMatchingNumbers(lotto, winningNumbers);
+            int matchCount = lotto.countMatching(winningLotto);
             boolean bonusMatch = lotto.contains(bonusNumber);
             Rank rank = Rank.findRank(matchCount, bonusMatch);
 
@@ -18,11 +18,6 @@ public class LottoResult {
         });
     }
 
-    private int countMatchingNumbers(Lotto lotto, List<Integer> winningNumbers) {
-        return (int) winningNumbers.stream()
-                .filter(lotto::contains)
-                .count();
-    }
 
     public int getCount(Rank rank) {
         return results.getOrDefault(rank, 0);
