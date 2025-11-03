@@ -97,7 +97,7 @@ public class InputView {
 
     public static int validateBonusNumber(List<Integer> winningNumbers, String number) {
         try {
-            int bonusNumber = Integer.parseInt(number);
+            int bonusNumber = Integer.parseInt(number.trim());
             duplicateLotto(winningNumbers, bonusNumber);
             validateRange(bonusNumber);
             return bonusNumber;
